@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Разия — 55 жас мерейтойға шақыру</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --bg-pearl: #faf8f5;
+      --gold-primary: #c5a059;
+      --gold-dark: #9e7b36;
+      --gold-light: #e6d3a7;
+      --text-main: #2c2a29;
+      --text-muted: #6e6862;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      background-color: #f2efe9;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Контейнер под экран телефона */
+    .phone-wrapper {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfaf7 50%, #ffffff 100%);
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 24px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Декоративная внутренняя рамка */
+    .inner-frame {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 20px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .inner-frame::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      border: 1px solid rgba(197, 160, 89, 0.15);
+      border-radius: 16px;
+    }
+
+    /* Плавающая кнопка музыки */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--gold-primary);
+      border-radius: 50px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(197, 160, 89, 0.28);
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: transform 0.2s ease;
+    }
+
+    .music-btn:active {
+      transform: scale(0.95);
+    }
+
+    .music-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .music-btn.playing .music-icon {
+      animation: spin 4s linear infinite;
+    }
+
+    .music-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold-dark);
+      letter-spacing: 0.4px;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Анимация золотых искр на фоне */
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Контент */
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .top-ornament {
+      margin-top: 34px;
+      color: var(--gold-dark);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    /* Иллюстрация лебедей */
+    .swans-container {
+      width: 265px;
+      height: 170px;
+      margin: 12px auto 6px;
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.2s forwards;
+    }
+
+    .swans-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 8px 16px rgba(197, 160, 89, 0.2));
+      animation: floatSwan 4.5s ease-in-out infinite;
+    }
+
+    @keyframes floatSwan {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Главный заголовок */
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1.05;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.4s forwards;
+    }
+
+    .age-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0 20px;
+      padding: 6px 26px;
+      border-top: 1px solid var(--gold-light);
+      border-bottom: 1px solid var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gold-primary);
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.5s forwards;
+    }
+
+    /* Текст приглашения от имени Разии */
+    .invitation-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      border-radius: 18px;
+      padding: 24px 18px;
+      margin: 4px 0 22px;
+      box-shadow: 0 8px 25px rgba(197, 160, 89, 0.08);
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.6s forwards;
+    }
+
+    .salutation {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .inv-text {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--text-main);
+      font-weight: 400;
+    }
+
+    .inv-text strong {
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+
+    .host-sign {
+      margin-top: 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--gold-dark);
+    }
+
+    /* Блок даты и времени */
+    .details-box {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 18px;
+      padding: 22px 16px;
+      margin-bottom: 22px;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.75s forwards;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--gold-primary);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .date-side {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--gold-light);
+      border-bottom: 1px solid var(--gold-light);
+      padding: 6px 0;
+      width: 85px;
+    }
+
+    .date-day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1;
+    }
+
+    .time-pill {
+      display: inline-block;
+      background: var(--bg-pearl);
+      border: 1px solid var(--gold-light);
+      color: var(--gold-dark);
+      padding: 6px 20px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Таймер обратного отсчета */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(197, 160, 89, 0.3);
+    }
+
+    .cd-item {
+      background: var(--bg-pearl);
+      border-radius: 10px;
+      padding: 8px 6px;
+      min-width: 58px;
+    }
+
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      line-height: 1.1;
+    }
+
+    .cd-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Локация и кнопка 2ГИС */
+    .location-box {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      border-radius: 18px;
+      padding: 22px 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.9s forwards;
+    }
+
+    .venue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 4px 0;
+    }
+
+    .venue-city {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .btn-2gis {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #27ae60, #1e8449);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.28);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-2gis:active {
+      transform: scale(0.97);
+    }
+
+    /* Подпись внизу */
+    .footer-note {
+      margin-top: 6px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 1.05s forwards;
+    }
+
+    .footer-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 21px;
+      color: var(--gold-dark);
+    }
+
+    .divider-ornament {
+      width: 120px;
+      height: 16px;
+      margin: 10px auto;
+      opacity: 0.7;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Кнопка управления казахской мелодией -->
+  <button class="music-btn" id="musicToggle" aria-label="Әуенді қосу/өшіру">
+    <span class="music-icon" id="musicIcon">♪</span>
+    <span class="music-label" id="musicText">Әуен қосулы</span>
+  </button>
+
+  <div class="phone-wrapper">
+    <div class="inner-frame"></div>
+    <canvas id="particles"></canvas>
+
+    <div class="content">
+      <div class="top-ornament">Мерейтойға шақыру</div>
+
+      <!-- Векторная иллюстрация двух грациозных лебедей -->
+      <div class="swans-container">
+        <svg class="swans-svg" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="swanWhiteLeft" x1="40" y1="30" x2="150" y2="170" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="70%" stop-color="#f7f3eb"/>
+              <stop offset="100%" stop-color="#e5d5b5"/>
+            </linearGradient>
+            <linearGradient id="swanWhiteRight" x1="280" y1="30" x2="170" y2="170" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="70%" stop-color="#f7f3eb"/>
+              <stop offset="100%" stop-color="#e5d5b5"/>
+            </linearGradient>
+            <linearGradient id="goldStroke" x1="0" y1="0" x2="320" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#dfbe7b"/>
+              <stop offset="50%" stop-color="#b58d3d"/>
+              <stop offset="100%" stop-color="#e6cc93"/>
+            </linearGradient>
+          </defs>
+
+          <circle cx="160" cy="95" r="72" fill="url(#goldStroke)" fill-opacity="0.07"/>
+          <circle cx="160" cy="95" r="56" stroke="url(#goldStroke)" stroke-width="0.8" stroke-dasharray="3 3" stroke-opacity="0.5"/>
+
+          <path d="M55 168 Q110 162 160 168 T265 168" stroke="url(#goldStroke)" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M85 177 Q130 172 160 177 T235 177" stroke="url(#goldStroke)" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+
+          <!-- ЛЕВЫЙ ЛЕБЕДЬ -->
+          <g>
+            <path d="M58 158 C42 146, 36 125, 52 108 C65 95, 88 98, 108 112 C125 124, 145 142, 158 158 C130 163, 86 164, 58 158 Z"
+                  fill="url(#swanWhiteLeft)" stroke="url(#goldStroke)" stroke-width="1.6"/>
+            <path d="M62 135 C78 122, 102 125, 122 140" stroke="url(#goldStroke)" stroke-width="1.1" stroke-linecap="round" opacity="0.75"/>
+            <path d="M54 146 C74 136, 98 138, 118 150" stroke="url(#goldStroke)" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+            <path d="M132 142 C125 115, 96 86, 102 52 C106 30, 128 22, 144 34 C153 41, 156 50, 159 56 C152 54, 145 50, 141 44 C134 35, 118 39, 116 54 C113 78, 142 108, 154 148 Z"
+                  fill="url(#swanWhiteLeft)" stroke="url(#goldStroke)" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M156 50 L163 57 L154 57 Z" fill="#c59b48"/>
+          </g>
+
+          <!-- ПРАВЫЙ ЛЕБЕДЬ -->
+          <g>
+            <path d="M262 158 C278 146, 284 125, 268 108 C255 95, 232 98, 212 112 C195 124, 175 142, 162 158 C190 163, 234 164, 262 158 Z"
+                  fill="url(#swanWhiteRight)" stroke="url(#goldStroke)" stroke-width="1.6"/>
+            <path d="M258 135 C242 122, 218 125, 198 140" stroke="url(#goldStroke)" stroke-width="1.1" stroke-linecap="round" opacity="0.75"/>
+            <path d="M266 146 C246 136, 222 138, 202 150" stroke="url(#goldStroke)" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+            <path d="M188 142 C195 115, 224 86, 218 52 C214 30, 192 22, 176 34 C167 41, 164 50, 161 56 C168 54, 175 50, 179 44 C186 35, 202 39, 204 54 C207 78, 178 108, 166 148 Z"
+                  fill="url(#swanWhiteRight)" stroke="url(#goldStroke)" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M164 50 L157 57 L166 57 Z" fill="#c59b48"/>
+          </g>
+
+          <path d="M160 76 L162 82 L168 84 L162 86 L160 92 L158 86 L152 84 L158 82 Z" fill="#c5a059"/>
+        </svg>
+      </div>
+
+      <h1 class="hero-title">Разия</h1>
+      <div class="age-badge">55 ЖАС</div>
+
+      <!-- Текст приглашения от имени самой Разии -->
+      <div class="invitation-card">
+        <div class="salutation">Құрметті ағайын-туыс, бауырлар, құда-жекжат, дос-жарандар!</div>
+        <p class="inv-text">
+          Сіздерді өмірімнің мерейлі белесі — <strong>55 жас</strong> туған күніме арналған салтанатты ақ дастарханымның қадірлі қонағы болуға шын жүректен шақырамын!
+        </p>
+        <div class="host-sign">Ізгі ниетпен, той иесі — Разия</div>
+      </div>
+
+      <!-- Дата, время и таймер -->
+      <div class="details-box">
+        <div class="section-label">Тойдың уақыты</div>
+        <div class="date-row">
+          <div class="date-side">Қаңтар</div>
+          <div class="date-day">18</div>
+          <div class="date-side">Сағат 19:00</div>
+        </div>
+        <div class="time-pill">Басталуы: 19:00</div>
+
+        <div class="countdown" id="countdown">
+          <div class="cd-item">
+            <div class="cd-num" id="cd-days">00</div>
+            <div class="cd-label">күн</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cd-hours">00</div>
+            <div class="cd-label">сағат</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cd-mins">00</div>
+            <div class="cd-label">минут</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cd-secs">00</div>
+            <div class="cd-label">секунд</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Место проведения и кнопка 2ГИС -->
+      <div class="location-box">
+        <div class="section-label">Мекен-жайымыз</div>
+        <div class="venue-name">«Хан Төре 2» мейрамханасы</div>
+        <div class="venue-city">Кентау қаласы</div>
+
+        <a class="btn-2gis"
+           href="https://2gis.kz/turkestan/geo/70030076446020303/68.498948%2C43.498134?m=68.498741%2C43.498043%2F21%2Fp%2F4.49%2Fr%2F44.38"
+           target="_blank"
+           rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          2ГИС картадан ашу
+        </a>
+      </div>
+
+      <!-- Завершающее пожелание -->
+      <div class="footer-note">
+        <svg class="divider-ornament" viewBox="0 0 120 16" fill="none">
+          <path d="M5 8 H48 M72 8 H115" stroke="#c5a059" stroke-width="1"/>
+          <path d="M60 2 L66 8 L60 14 L54 8 Z" stroke="#c5a059" stroke-width="1.2"/>
+        </svg>
+        <p>Қуанышыма ортақ болыңыздар!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ============================================================
+       1. АВТОМАТИЧЕСКАЯ ПЛАВНАЯ ПРОКРУТКА СТРАНИЦЫ (САМО КРУТИТСЯ)
+       ============================================================ */
+    let autoScrollActive = true;
+    let scrollSpeed = 0.65; // Плавная скорость прокрутки
+    let currentScrollY = window.scrollY;
+
+    // Останавливаем автопрокрутку, если человек сам начал листать пальцем или колесиком
+    function stopAutoScroll() {
+      autoScrollActive = false;
+    }
+    window.addEventListener('touchstart', stopAutoScroll, { passive: true });
+    window.addEventListener('wheel', stopAutoScroll, { passive: true });
+
+    function autoScrollStep() {
+      if (autoScrollActive) {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (maxScroll > 0 && currentScrollY < maxScroll) {
+          currentScrollY += scrollSpeed;
+          window.scrollTo(0, currentScrollY);
+        } else if (currentScrollY >= maxScroll && maxScroll > 0) {
+          // Дошли до конца — останавливаемся, чтобы гость мог спокойно нажать кнопку 2ГИС
+          autoScrollActive = false;
+        }
+      }
+      requestAnimationFrame(autoScrollStep);
+    }
+
+    // Небольшая пауза 1.3 сек на старте, чтобы человек увидел лебедей, затем плавный спуск
+    setTimeout(() => {
+      currentScrollY = window.scrollY;
+      requestAnimationFrame(autoScrollStep);
+    }, 1300);
+
+    /* ============================================================
+       2. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ДО 18 ЯНВАРЯ 19:00
+       ============================================================ */
+    function updateCountdown() {
+      const now = new Date();
+      let targetYear = now.getFullYear();
+      let targetDate = new Date(targetYear, 0, 18, 19, 0, 0);
+
+      if (now > targetDate) {
+        targetDate = new Date(targetYear + 1, 0, 18, 19, 0, 0);
+      }
+
+      const diff = targetDate - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / 1000 / 60) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ============================================================
+       3. КАЗАХСКАЯ МЕЛОДИЯ (ДОМБРА / ЛИРИЧЕСКИЙ КҮЙ) + АВТОЗАПУСК
+       ============================================================ */
+    let audioCtx = null;
+    let isPlaying = false;
+    let userManuallyStopped = false;
+    let melodyTimer = null;
+    let stepIndex = 0;
+
+    // Казахская лирическая пентатоника (звучание двухструнной домбры: бурдон + мелодия)
+    // Ноты: Ре (D), Ми (E), Фа# (F#), Ля (A), Си (B), Ре5 (D5), Ми5 (E5)
+    const kuiPattern = [
+      { lead: 293.66, drone: 146.83, dur: 420 }, // D4 + D3
+      { lead: 329.63, drone: 0,      dur: 210 }, // E4
+      { lead: 369.99, drone: 220.00, dur: 420 }, // F#4 + A3
+      { lead: 440.00, drone: 146.83, dur: 630 }, // A4 + D3
+      { lead: 493.88, drone: 220.00, dur: 420 }, // B4 + A3
+      { lead: 440.00, drone: 0,      dur: 210 }, // A4
+      { lead: 369.99, drone: 146.83, dur: 420 }, // F#4 + D3
+      { lead: 329.63, drone: 220.00, dur: 630 }, // E4 + A3
+
+      { lead: 440.00, drone: 146.83, dur: 420 }, // A4 + D3
+      { lead: 493.88, drone: 0,      dur: 210 }, // B4
+      { lead: 587.33, drone: 220.00, dur: 630 }, // D5 + A3
+      { lead: 493.88, drone: 146.83, dur: 420 }, // B4 + D3
+      { lead: 440.00, drone: 220.00, dur: 420 }, // A4 + A3
+      { lead: 369.99, drone: 0,      dur: 210 }, // F#4
+      { lead: 329.63, drone: 146.83, dur: 420 }, // E4 + D3
+      { lead: 293.66, drone: 146.83, dur: 840 }  // D4 + D3 (финал фразы)
+    ];
+
+    // Имитация щипка струны домбры с теплым деревянным резонансом
+    function pluckDombraString(freq, volume, decayTime) {
+      if (!audioCtx || !freq) return;
+      const now = audioCtx.currentTime;
+
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      // Основной тон и обертон струны
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(freq, now);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(freq * 2, now);
+
+      // Фильтр, имитирующий мягкий щипок пальцем
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(freq * 4.5, now);
+      filter.frequency.exponentialRampToValueAtTime(freq * 1.2, now + decayTime);
+
+      // Огибающая щипка: быстрая атака, плавное затухание
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(volume, now + 0.018);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + decayTime);
+
+      const overtoneGain = audioCtx.createGain();
+      overtoneGain.gain.setValueAtTime(0.25, now);
+
+      osc1.connect(filter);
+      osc2.connect(overtoneGain);
+      overtoneGain.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + decayTime + 0.05);
+      osc2.stop(now + decayTime + 0.05);
+    }
+
+    function scheduleNextDombraNote() {
+      if (!isPlaying) return;
+      const note = kuiPattern[stepIndex % kuiPattern.length];
+      pluckDombraString(note.lead, 0.13, 1.35);
+      if (note.drone > 0) {
+        pluckDombraString(note.drone, 0.075, 1.6);
+      }
+      stepIndex++;
+      melodyTimer = setTimeout(scheduleNextDombraNote, note.dur);
+    }
+
+    function startMusic() {
+      if (userManuallyStopped) return;
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (audioCtx.state === 'running' && !isPlaying) {
+        isPlaying = true;
+        updateMusicUI();
+        scheduleNextDombraNote();
+      } else {
+        updateMusicUI();
+      }
+    }
+
+    function stopMusic() {
+      isPlaying = false;
+      clearTimeout(melodyTimer);
+      updateMusicUI();
+    }
+
+    function updateMusicUI() {
+      const btn = document.getElementById('musicToggle');
+      const text = document.getElementById('musicText');
+      if (isPlaying) {
+        btn.classList.add('playing');
+        text.textContent = 'Әуен қосулы';
+      } else {
+        btn.classList.remove('playing');
+        text.textContent = 'Әуенді қосу';
+      }
+    }
+
+    // Кнопка ручного включения / выключения
+    document.getElementById('musicToggle').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        userManuallyStopped = true;
+        stopMusic();
+      } else {
+        userManuallyStopped = false;
+        startMusic();
+      }
+    });
+
+    // Попытка запустить музыку сразу при загрузке страницы
+    window.addEventListener('load', () => {
+      startMusic();
+    });
+
+    // Если мобильный браузер заблокировал автозвук до первого касания — запускаем мгновенно при любом касании экрана
+    ['touchstart', 'click', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, () => {
+        if (!isPlaying && !userManuallyStopped) {
+          startMusic();
+        }
+      }, { passive: true });
+    });
+
+    /* ============================================================
+       4. ПЛАВАЮЩИЕ ЗОЛОТЫЕ ИСКРЫ НА БЕЛОМ ФОНЕ
+       ============================================================ */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Sparkle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.8;
+        this.speedY = -(Math.random() * 0.35 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.25;
+        this.opacity = Math.random() * 0.5 + 0.15;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        if (this.y < -10) {
+          this.y = canvas.height + 10;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(197, 160, 89, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 32; i++) {
+      particlesArray.push(new Sparkle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particlesArray) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
